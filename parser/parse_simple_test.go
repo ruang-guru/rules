@@ -246,6 +246,142 @@ func TestVersions(t *testing.T) {
 			true,
 			true,
 		},
+		{
+			`compareVersion(x >= 1.1.1)`,
+			obj{
+				"x": "2",
+			},
+			true,
+			false,
+		},
+		{
+			`compareVersion(x >= 1.1.1)`,
+			obj{
+				"x": "1",
+			},
+			false,
+			false,
+		},
+		{
+			`compareVersion(x >= 1.1.1)`,
+			obj{
+				"x": "1.2",
+			},
+			true,
+			false,
+		},
+		{
+			`compareVersion(x >= 1.1.1)`,
+			obj{
+				"x": "1.1",
+			},
+			false,
+			false,
+		},
+		{
+			`compareVersion(x >= 1.1.1)`,
+			obj{
+				"x": "1.1.1",
+			},
+			true,
+			false,
+		},
+		{
+			`compareVersion(x >= 1.1.2)`,
+			obj{
+				"x": "1.1.1",
+			},
+			false,
+			false,
+		},
+		{
+			`compareVersion(x >= 1.1.1)`,
+			obj{
+				"x": "1.1.1.1",
+			},
+			true,
+			false,
+		},
+		{
+			`compareVersion(x >= 1.2)`,
+			obj{
+				"x": "2",
+			},
+			true,
+			false,
+		},
+		{
+			`compareVersion(x >= 1.2)`,
+			obj{
+				"x": "1",
+			},
+			false,
+			false,
+		},
+		{
+			`compareVersion(x >= 1.2)`,
+			obj{
+				"x": "1.3",
+			},
+			true,
+			false,
+		},
+		{
+			`compareVersion(x >= 1.2)`,
+			obj{
+				"x": "1.1",
+			},
+			false,
+			false,
+		},
+		{
+			`compareVersion(x >= 1.2)`,
+			obj{
+				"x": "1.2.1",
+			},
+			true,
+			false,
+		},
+		{
+			`compareVersion(x >= 2)`,
+			obj{
+				"x": "2",
+			},
+			true,
+			false,
+		},
+		{
+			`compareVersion(x >= 2)`,
+			obj{
+				"x": "1",
+			},
+			false,
+			false,
+		},
+		{
+			`compareVersion(x >= 2)`,
+			obj{
+				"x": "2.1",
+			},
+			true,
+			false,
+		},
+		{
+			`compareVersion(x >= 1.1.1.2)`,
+			obj{
+				"x": "1.1.1.3",
+			},
+			true,
+			false,
+		},
+		{
+			`compareVersion(x >= 1.1.1.2)`,
+			obj{
+				"x": "1.1.1.1",
+			},
+			false,
+			false,
+		},
 	}
 
 	for _, tt := range tests {
@@ -255,7 +391,7 @@ func TestVersions(t *testing.T) {
 			continue
 		} else {
 			assert.NoError(t, err)
-			assert.Equal(t, result, tt.result, fmt.Sprintf("rule :%s, input :%v", tt.rule, tt.input))
+			assert.Equal(t, tt.result, result, fmt.Sprintf("rule :%s, input :%v", tt.rule, tt.input))
 		}
 		assert.Equal(t, false, Evaluate(tt.rule, obj{"x": 4.5}), tt.rule)
 		assert.Equal(t, tt.result, Evaluate(fmt.Sprintf("(%s)", tt.rule), tt.input), tt.rule)
