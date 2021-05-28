@@ -1,6 +1,8 @@
 package parser
 
 import (
+	"strings"
+
 	"github.com/hashicorp/go-version"
 )
 
@@ -18,6 +20,10 @@ func (v *VersionOperation) get(left Operand, right Operand) (*version.Version, *
 	if !ok {
 		return nil, nil, newErrInvalidOperand(right, rightVal)
 	}
+
+	// strip metadata prerelease
+	leftVal = strings.Split(leftVal, "-")[0]
+
 	var err error
 	leftVer, err = version.NewVersion(leftVal)
 	if err != nil {

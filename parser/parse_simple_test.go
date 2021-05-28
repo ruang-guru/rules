@@ -382,6 +382,54 @@ func TestVersions(t *testing.T) {
 			false,
 			false,
 		},
+		{
+			`x >= 1.2.3`,
+			obj{
+				"x": "1.2.3-dev",
+			},
+			true,
+			false,
+		},
+		{
+			`x >= 1.2.3`,
+			obj{
+				"x": "1.2.2-dev",
+			},
+			false,
+			false,
+		},
+		{
+			`compareVersion(x >= 1.2.3)`,
+			obj{
+				"x": "1.2.3-dev",
+			},
+			true,
+			false,
+		},
+		{
+			`compareVersion(x >= 1.2.3)`,
+			obj{
+				"x": "1.2.2-dev",
+			},
+			false,
+			false,
+		},
+		{
+			`compareVersion(x >= "1.2.3-dev")`,
+			obj{
+				"x": "1.2.3",
+			},
+			true,
+			false,
+		},
+		{
+			`compareVersion(x >= "1.2.3-dev")`,
+			obj{
+				"x": "1.2.2-dev",
+			},
+			false,
+			false,
+		},
 	}
 
 	for _, tt := range tests {
