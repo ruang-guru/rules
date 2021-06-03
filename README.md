@@ -53,15 +53,15 @@ not: not of a logical expression
 ```
 
 ## How to use it 
-Use your dependency manager to import `github.com/nikunjy/rules/parser`. This will let you parse a rule and keep the parsed representation around. 
-Alternatively, you can also use `github.com/nikunjy/rules` directly to call the root `Evaluate(string, map[string]interface{})` method. 
+Use your dependency manager to import `github.com/ruang-guru/rules/parser`. This will let you parse a rule and keep the parsed representation around. 
+Alternatively, you can also use `github.com/ruang-guru/rules` directly to call the root `Evaluate(string, map[string]interface{})` method. 
 
-I would recommend importing `github.com/nikunjy/rules/parser` 
+I would recommend importing `github.com/ruang-guru/rules/parser` 
 
 ## How to extend the grammar
 1. Please look at this [antlr tutorial](https://tomassetti.me/antlr-mega-tutorial/#setup-antlr), the link will show you how to setup antlr. 
 The article has a whole lot of detail about antlr I encourage you to read it, you might also like [my blog post](https://medium.com/@nikunjyadav/generic-rules-engine-in-golang-using-antlr-d30a0d0bb565) about this repo.
-2. After taking a look at the antlr tutorial, you can extend the [JsonQuery.g4 file](https://github.com/nikunjy/rules/blob/master/parser/JsonQuery.g4). 
+2. After taking a look at the antlr tutorial, you can extend the [JsonQuery.g4 file](https://github.com/ruang-guru/rules/blob/master/parser/JsonQuery.g4). 
 3. Compile the parser `antlr4 -Dlanguage=Go -visitor -no-listener JsonQuery.g4 -o ./` (Note: `-o` is the output directory, make sure all the stuff it generates is in the `parser` directory of the root repo folder)
 
 [ci-img]: https://api.travis-ci.org/nikunjy/rules.svg?branch=master

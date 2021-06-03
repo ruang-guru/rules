@@ -3,6 +3,7 @@ grammar JsonQuery;
 query
    : NOT? SP? '(' query ')'                                                                         #parenExp
    | query SP LOGICAL_OPERATOR SP query                                                             #logicalExp
+   | COMPARE_VERSION '(' attrPath SP op=( EQ | NE | GT | LT | GE | LE ) SP value ')'                #compareVersionExp
    | attrPath SP 'pr'                                                                               #presentExp
    | attrPath SP op=( EQ | NE | GT | LT | GE | LE | CO | SW | EW | IN ) SP value       #compareExp
    ;
@@ -21,6 +22,10 @@ BOOLEAN
 
 NULL
    : 'null'
+   ;
+
+COMPARE_VERSION
+   : 'compareVersion'
    ;
 
 IN:  'IN' | 'in';
@@ -70,7 +75,7 @@ value
    ;
 
 VERSION
-   : INT '.' INT '.' INT 
+   : INT '.' INT ('.' INT)+ 
    ;
 
 STRING

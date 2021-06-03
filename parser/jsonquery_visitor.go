@@ -1,4 +1,4 @@
-// Code generated from JsonQuery.g4 by ANTLR 4.7.1. DO NOT EDIT.
+// Code generated from JsonQuery.g4 by ANTLR 4.8. DO NOT EDIT.
 
 package parser // JsonQuery
 
@@ -7,6 +7,9 @@ import "github.com/antlr/antlr4/runtime/Go/antlr"
 // A complete Visitor for a parse tree produced by JsonQueryParser.
 type JsonQueryVisitor interface {
 	antlr.ParseTreeVisitor
+
+	// Visit a parse tree produced by JsonQueryParser#compareVersionExp.
+	VisitCompareVersionExp(ctx *CompareVersionExpContext) interface{}
 
 	// Visit a parse tree produced by JsonQueryParser#compareExp.
 	VisitCompareExp(ctx *CompareExpContext) interface{}
